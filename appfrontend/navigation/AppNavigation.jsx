@@ -11,6 +11,8 @@ import ProjectScreen from '../screens/Projects/ProjectsScreen';
 import ChatMainScreen from '../screens/Chat/ChatMainScreen';
 import FriendReq from '../screens/FriendReq';
 import Chatbot from '../screens/Chatbot';
+import Call_view from '../screens/Call_view';
+import Call_home from '../screens/Call_home';
 
 const Stack = createStackNavigator();
 
@@ -31,6 +33,11 @@ const AppNavigation = () => {
         <Stack.Screen name="ChatMain" component={ChatMainScreen} />
         <Stack.Screen name="FriendReq" component={FriendReq} />
         <Stack.Screen name="Chatbot" component={Chatbot} />
+
+        {/* for meeting  */}
+        <Stack.Screen name="Call_view" component={Call_view} />
+       
+
 
 
       </Stack.Navigator>
