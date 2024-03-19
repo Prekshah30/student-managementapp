@@ -1,0 +1,1 @@
+export default ip = 'http://192.168.29.141:5000'
