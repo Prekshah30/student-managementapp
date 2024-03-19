@@ -129,18 +129,10 @@ const HomeScreen = () => {
       {/*header  */}
 
       <View style={tw``}>
-        <View style={tw`mt-4 flex flex-row  `}>
-          <TouchableOpacity>
-            <MaterialCommunityIcons
-              style={tw`ml-2`}
-              name="arrow-left"
-              size={26}
-              color="black"
-            />
-          </TouchableOpacity>
+        <View style={tw`mt-4 -ml-12 flex h-12 flex-row  `}>
 
           <Text style={tw`text-black font-bold ml-18 text-lg`}>
-            Project Management
+            Feed
           </Text>
         </View>
         <Feather

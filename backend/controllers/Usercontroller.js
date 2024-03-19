@@ -119,7 +119,47 @@ const getAllRequest = async (req, res) => {
 }
 
 
+const acceptFriendRequest = async (req, res) => {
+    try {
+        const { userId, senderId } = req.body;
+        console.log('UserId:', userId);
+        console.log('SenderId:', senderId);
+        // Update receiver's friend list
+        await User.findByIdAndUpdate(userId, {
+            $addToSet: { friends: senderId },
+            $pull: { friendRequests: senderId }
+        });
 
+        // Update sender's friend list
+        await User.findByIdAndUpdate(senderId, {
+            $addToSet: { friends: userId },
+            $pull: { sentFriendRequests: userId }
+        });
+
+        res.status(200).json({ message: 'Friend request accepted successfully' });
+        console.log('Friend request accepted successfully');
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+}
+
+const getAllFriends = async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        const user = await User.findById(userId).populate(
+            "friends",
+            "name email"
+          );
+        const friends = user.friends;
+        console.log('Friends:', friends);
+        res.status(200).json({ friends });
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+}
 
 // export both controllers individually to use in routes
-module.exports = { createUser, loginUser, getAllUsers , sendFriendRequest ,getAllRequest}
+module.exports = { createUser, loginUser, getAllUsers , sendFriendRequest ,getAllRequest ,acceptFriendRequest , getAllFriends}
