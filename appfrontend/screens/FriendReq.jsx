@@ -5,24 +5,35 @@ import tw from 'twrnc';
 import {useNavigation} from '@react-navigation/native';
 import ipconstant from '../ipconstant/ipconstant';
 import axios from 'axios';
-import { useUser } from '../context/allContext';
+import {useUser} from '../context/allContext';
 
 const FriendReq = () => {
   const navigation = useNavigation();
   const [peoples, setPeoples] = useState([]);
   const {userId} = useUser();
-
+  const [name, setName] = useState('');
+  const [email,setEmail] = useState('');
+  const [senderId, setSenderId] = useState('');
 
   useEffect(() => {
     persons();
-  },[])
+  }, []);
 
   const persons = async () => {
     try {
-    console.log('Body:',userId);
-      const response = await axios.get(`${ipconstant}/api/get-friend-requests/${userId}`);
+      console.log('Body:', userId);
+      const response = await axios.get(
+        `${ipconstant}/api/get-all-friend-requests/${userId}`,
+      );
+      console.log('Response.data',response.data);
       setPeoples(response.data);
-      console.log('User request:', users.data);
+
+      console.log('Name:', response.data.friend.name);
+      console.log('Email:', response.data.friend.email);
+      setName(response.data.friend.name);
+      setEmail(response.data.friend.email);
+      setSenderId(response.data._id);
+     
     } catch (err) {
       console.log(err);
     }
@@ -47,36 +58,38 @@ const FriendReq = () => {
       <View style={tw`mt-3`}></View>
       {/* Main chat screen Add friend */}
       {/* Box */}
-      {
-      peoples.map((people)=>
-      (
-        <View
-          style={tw`mt-2 min-h-20 border-b border-gray-300 flex flex-row justify-between rounded-bl-lg rounded-br-lg bg-transparent shadow-md p-3`}>
-          {/* Icon */}
-          <View style={tw`h-20 flex flex-col justify-center`}>
-            <Image
-              style={tw`w-13 h-13 rounded-full`}
-              source={require('../assets/images/Projectmanagement/user3.png')}
-            />
-          </View>
-          {/* Name Email */}
-          <View style={tw`mt-3`}>
-            <Text style={tw`text-black font-bold text-base`}>{people.name}</Text>
-            <Text style={tw`text-gray-500 text-sm`}>{people.email}</Text>
-          </View>
-          {/*  Add Friend Btn   */}
-          <View style={tw`flex flex-col justify-center`}>
-            <TouchableOpacity
-              style={tw`h-12 w-24 bg-yellow-400 shadow-lg  rounded-lg flex items-center justify-center`}>
-              <Text style={tw`text-white font-bold text-sm`}>
-                Accept Request
+      <>
+        {name ? (
+          <View
+            style={tw`mt-2 min-h-20 border-b border-gray-300 flex flex-row justify-between rounded-bl-lg rounded-br-lg bg-transparent shadow-md p-3`}>
+            {/* Icon */}
+            <View style={tw`h-20 flex flex-col justify-center`}>
+              <Image
+                style={tw`w-13 h-13 rounded-full`}
+                source={require('../assets/images/Projectmanagement/user3.png')}
+              />
+            </View>
+            {/* Name Email */}
+            <View style={tw`mt-3`}>
+              <Text style={tw`text-black font-bold text-base`}>
+                {name}
               </Text>
-            </TouchableOpacity>
+              <Text style={tw`text-gray-500 text-sm`}>{email}</Text>
+            </View>
+            {/*  Add Friend Btn   */}
+            <View style={tw`flex flex-col justify-center`}>
+              <TouchableOpacity
+                style={tw`h-12 w-24 bg-yellow-400 shadow-lg  rounded-lg flex items-center justify-center`}>
+                <Text style={tw`text-white font-bold text-sm`}>
+                  Accept Request
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-      )
-      )
-    }
+        ) : (
+          <></>
+        )}
+      </>
     </View>
   );
 };

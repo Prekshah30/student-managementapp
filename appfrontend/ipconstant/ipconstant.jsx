@@ -1,1 +1,1 @@
-export default ip = 'http://192.168.3.102:5000'
+export default ip = 'http://192.168.29.142:5000'

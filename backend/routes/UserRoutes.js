@@ -4,7 +4,7 @@ const router = express.Router();
 // importing controllers
 
 // importing user controller
-const {createUser,loginUser, getAllUsers, sendFriendRequest} =require('../controllers/Usercontroller')
+const {createUser,loginUser, getAllUsers, sendFriendRequest, getAllRequest} =require('../controllers/Usercontroller')
 
 // creating routes
 
@@ -19,6 +19,10 @@ router.get('/users',getAllUsers)
 
 // send friend request
 router.post('/send-friend-request', sendFriendRequest);
+
+
+// get all friend requests
+router.get('/get-all-friend-requests/:userId', getAllRequest);
 
 
 

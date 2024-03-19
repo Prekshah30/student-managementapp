@@ -101,7 +101,16 @@ const sendFriendRequest = async (req, res) => {
 
 const getAllRequest = async (req, res) => {
     try {
-        
+        const userId = req.params.userId;
+        const stringId = userId.toString();
+       const user = await User.findById(stringId);
+        console.log('User:', user);
+        const userFriend =  user.friendRequests[0];
+        console.log('UserFriend:', userFriend);
+        const friend = await User.findById(userFriend);
+        console.log('Friend:', friend);
+        res.status(200).json({ friend });
+
     }
     catch (err) {
         console.log(err);
@@ -113,4 +122,4 @@ const getAllRequest = async (req, res) => {
 
 
 // export both controllers individually to use in routes
-module.exports = { createUser, loginUser, getAllUsers , sendFriendRequest }
+module.exports = { createUser, loginUser, getAllUsers , sendFriendRequest ,getAllRequest}
