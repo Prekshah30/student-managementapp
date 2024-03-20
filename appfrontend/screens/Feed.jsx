@@ -49,18 +49,18 @@ LogBox.ignoreAllLogs();
 
         <View>
           <Image
-            style={tw`m-3 w-90 h-50 rounded-xl`}
-            source={require('../assets/images/Projectmanagement/viewdoc.png')}
+            style={tw`m-3 w-90 h-50 rounded-xl border border-black `}
+            source={require('../assets/ml.jpg')}
           />
         </View>
 
         {/* View Document */}
 
-        <TouchableOpacity style={tw`m-3 bg-gray-200 w-90 p-4 rounded-3xl`}>
+        {/* <TouchableOpacity style={tw`m-3 bg-gray-200 w-90 p-4 rounded-3xl`}>
           <Text style={tw`text-black font-bold ml-3 text-center `}>
             View Document
           </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         {/* Aidan */}
 
@@ -161,17 +161,17 @@ LogBox.ignoreAllLogs();
         <View>
           <Image
             style={tw`m-3 w-90 h-50 rounded-xl`}
-            source={require('../assets/images/Projectmanagement/viewdoc.png')}
+            source={require('../assets/images/frontenddev.jpg')}
           />
         </View>
 
         {/* View Document */}
 
-        <TouchableOpacity style={tw`m-3 bg-gray-200 w-90 p-4 rounded-3xl`}>
+        {/* <TouchableOpacity style={tw`m-3 bg-gray-200 w-90 p-4 rounded-3xl`}>
           <Text style={tw`text-black font-bold ml-3 text-center `}>
             View Document
           </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         {/* Aidan */}
 

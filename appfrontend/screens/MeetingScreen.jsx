@@ -1,11 +1,28 @@
 import { useNavigation } from "@react-navigation/native";
 import React, {useState, useRef} from "react";
-import { Text ,View, Button, TextInput, Dimensions, TouchableOpacity, StyleSheet, TouchableWithoutFeedback, Modal} from "react-native";
+import { Text ,View,SafeAreaView, Button, TextInput, Dimensions, TouchableOpacity, StyleSheet, TouchableWithoutFeedback, Modal} from "react-native";
 const { width } = Dimensions.get('window');
 import moment from 'moment';
 import Swiper from 'react-native-swiper';
 
-const MeetingScreen = ({navigation}) => {
+const Schedule = () => {
+      const navigation = useNavigation();
+      const [name,setName] = useState('')
+  return (
+    <View>
+        <TextInput placeholder="Enter your name" 
+        value={name} 
+        onChangeText={(text)=>setName(text)}
+        style={{color:'black'}}/>
+        <Button title="join call" onPress={()=>{
+            navigation.navigate('Call_view',{data:name})
+        }}/>
+       
+    </View>
+  )
+}
+
+  export const MeetingScreen=()=> {
   const swiper = useRef();
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [meetings, setMeetings] = useState([]);
@@ -44,17 +61,10 @@ const MeetingScreen = ({navigation}) => {
     setShowModal(false);
   };
 
-    //const navigation = useNavigation();
-    const [name,setName] = useState('')
   return (
-    <View>
-        <TextInput placeholder="Enter your name" 
-        value={name} 
-        onChangeText={(text)=>setName(text)}
-        style={{color:'black'}}/>
-        <Button title="join call" onPress={()=>{
-            navigation.navigate('Call_view',{data:name})
-        }}/>
+    <View style={{ flex:1}}>
+      <Schedule/>
+      <View style={styles.container}>
         <View style={styles.header}>
           <Text style={styles.title}>Your Schedule</Text>
         </View>
@@ -148,14 +158,12 @@ const MeetingScreen = ({navigation}) => {
               <TextInput
                 style={styles.input}
                 placeholder="Meeting Title"
-                placeholderTextColor={'gray'}
                 value={meetingTitle}
                 onChangeText={text => setMeetingTitle(text)}
               />
               <TextInput
                 style={styles.input}
                 placeholder="Meeting Time"
-                placeholderTextColor={'gray'}
                 value={meetingTime}
                 onChangeText={text => setMeetingTime(text)}
               />
@@ -164,141 +172,10 @@ const MeetingScreen = ({navigation}) => {
             </View>
           </View>
         </Modal>
+      </View>
     </View>
-  )
+  );
 }
-
-export default MeetingScreen
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     paddingVertical: 24,
-//   },
-//   header: {
-//     paddingHorizontal: 16,
-//   },
-//   title: {
-//     fontSize: 32,
-//     fontWeight: '700',
-//     color: '#1d1d1d',
-//     marginBottom: 12,
-//   },
-//   picker: {
-//     flex: 1,
-//     maxHeight: 74,
-//     paddingVertical: 12,
-//     flexDirection: 'row',
-//     alignItems: 'center',
-//   },
-//   subtitle: {
-//     fontSize: 17,
-//     fontWeight: '600',
-//     color: '#999999',
-//     marginBottom: 12,
-//   },
-//   footer: {
-//     marginTop: 'auto',
-//     paddingHorizontal: 16,
-//   },
-//   item: {
-//     flex: 1,
-//     height: 50,
-//     marginHorizontal: 4,
-//     paddingVertical: 6,
-//     paddingHorizontal: 4,
-//     borderWidth: 1,
-//     borderRadius: 8,
-//     borderColor: '#e3e3e3',
-//     flexDirection: 'column',
-//     alignItems: 'center',
-//   },
-//   itemRow: {
-//     width: width,
-//     flexDirection: 'row',
-//     alignItems: 'flex-start',
-//     justifyContent: 'space-between',
-//     marginHorizontal: -4,
-//   },
-//   itemWeekday: {
-//     fontSize: 13,
-//     fontWeight: '500',
-//     color: '#737373',
-//     marginBottom: 4,
-//   },
-//   itemDate: {
-//     fontSize: 15,
-//     fontWeight: '600',
-//     color: '#111',
-//   },
-//   placeholder: {
-//     flexGrow: 1,
-//     flexShrink: 1,
-//     flexBasis: 0,
-//     marginTop: 0,
-//     padding: 0,
-//     backgroundColor: 'transparent',
-//   },
-//   meeting: {
-//     paddingVertical: 6,
-//     paddingHorizontal: 10,
-//     backgroundColor: '#f0f0f0',
-//     borderRadius: 8,
-//     marginBottom: 8,
-//   },
-//   meetingText: {
-//     fontSize: 16,
-//     fontWeight: '500',
-//     color: '#333',
-//   },
-//   btn: {
-//     flexDirection: 'row',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//     borderRadius: 8,
-//     paddingVertical: 10,
-//     paddingHorizontal: 20,
-//     borderWidth: 1,
-//     backgroundColor: '#007aff',
-//     borderColor: '#007aff',
-//   },
-//   btnText: {
-//     fontSize: 18,
-//     lineHeight: 26,
-//     fontWeight: '600',
-//     color: '#fff',
-//   },
-//   modalContainer: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     backgroundColor: 'rgba(0, 0, 0, 0.5)',
-//   },
-//   modalContent: {
-//     backgroundColor: '#fff',
-//     borderRadius: 8,
-//     padding: 20,
-//     width: '80%',
-//   },
-  
-
-//   modalTitle: {
-//     fontSize: 20,
-//     fontWeight: 'bold',
-//     marginBottom: 10,
-//     color: 'black'
-//   },
-//   input: {
-//     height: 40,
-//     borderColor: 'gray',
-//     borderWidth: 1,
-//     borderRadius: 8,
-//     marginBottom: 10,
-//     paddingHorizontal: 10,
-//     color: '#000', // Input text color
-//     placeholderTextColor: 'black', // Placeholder text color
-//   },
-// });
-
 
 const styles = StyleSheet.create({
   container: {
@@ -315,6 +192,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   picker: {
+    flex: 1,
     maxHeight: 74,
     paddingVertical: 12,
     flexDirection: 'row',
@@ -369,8 +247,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   meeting: {
-    paddingVertical: 10,
-    paddingHorizontal: 16,
+    paddingVertical: 6,
+    paddingHorizontal: 10,
     backgroundColor: '#f0f0f0',
     borderRadius: 8,
     marginBottom: 8,
@@ -385,8 +263,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 8,
-    paddingVertical: 14,
+    paddingVertical: 10,
     paddingHorizontal: 20,
+    borderWidth: 1,
     backgroundColor: '#007aff',
     borderColor: '#007aff',
   },
@@ -408,6 +287,8 @@ const styles = StyleSheet.create({
     padding: 20,
     width: '80%',
   },
+  
+
   modalTitle: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -421,8 +302,12 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 10,
     paddingHorizontal: 10,
-    color: '#000',
+    color: '#000', // Input text color
+    placeholderTextColor: 'black', // Placeholder text color
   },
 });
+
+
+export default MeetingScreen
 
 
