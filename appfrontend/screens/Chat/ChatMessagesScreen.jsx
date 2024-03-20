@@ -31,23 +31,26 @@ const ChatMessagesScreen = () => {
 
   
   useEffect(() => {
-    const fetchRecepientData = async () => {
-        try {
-
-            const response = await fetch(`${ipconstant}/api/user/${recepientId}`);
-
-            const data =await response.json();
-            setRecepientData(data);
-            
-        }
-        catch (error) {
-            console.log('Error in fetching the recepient data', error);
-        }
+    
         fetchRecepientData();
-    }
+
     },[]);
 
 
+    const fetchRecepientData = async () => {
+      try {
+          const response = await axios.get(`${ipconstant}/api/user/${recepientId}`);
+          const data =await response.data;
+          console.log('Hello from the recepient data:')
+          setRecepientData(data);
+          
+      }
+      catch (error) {
+          console.log('Error in fetching the recepient data', error);
+      }
+    }
+
+    
     const handleSend = async (messageType, imageUri) => {
         try {
           const formData = new FormData();
@@ -84,7 +87,7 @@ const ChatMessagesScreen = () => {
         }
       };
     
-      console.log('RecepientData:',recepientData);
+      console.log('Recepient Data:', recepientData);
   useLayoutEffect(() => {
     navigation.setOptions({
         headerTitle:'',

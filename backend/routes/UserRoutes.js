@@ -6,6 +6,8 @@ const router = express.Router();
 // importing user controller
 const {createUser,loginUser, getAllUsers, sendFriendRequest, getAllRequest, acceptFriendRequest, getAllFriends} =require('../controllers/Usercontroller')
 
+
+
 // creating routes
 
 // User login signup routes
