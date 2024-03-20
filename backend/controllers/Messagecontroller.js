@@ -25,23 +25,24 @@ const upload = multer({ storage: storage });
 
 const postMessage = async (req, res) => {
   try {
-    const { senderId, recepientId, messageType, messageText } = req.body
+    const { senderId, recepientId, messageType, messageText } = req.body;
 
     const newMessage = new Message({
       senderId,
       recepientId,
       messageType,
-      messageText,
+      message: messageText,
       timestamp: new Date(),
-      imageUrl: messageType === 'image' ? req.file.path : null,
-    })
+      imageUrl: messageType === "image" ? req.file.path : null,
+    });
+
     await newMessage.save();
-    res.status(200).json({ message: "Message sent successfully" })
+    res.status(200).json({ message: "Message sent Successfully" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
-  catch (err) {
-    console.log(err)
-    res.status(500).json({ error: "Internal server error" })
-  }
+
 }
 
 
@@ -62,8 +63,7 @@ const getUserDetails = async (req, res) => {
 
 const getMessages = async (req, res) => {
   try {
-    const  senderId= req.params.senderId;
-    const recepientId = req.params.recepientId;
+    const { senderId, recepientId } = req.params;
 
     const messages = await Message.find({
       $or: [
