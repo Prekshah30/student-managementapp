@@ -1,26 +1,26 @@
 export const tasks = [
     {
         id: 1,
-        todo: 'Go Excercising',
+        todo: 'Add a file',
     },
     {
         id: 2,
-        todo: 'Go to bed early',
+        todo: 'Schedule meeting ',
     },
     {
         id: 3,  
-        todo: 'Take pill reminder',
+        todo: 'Complete a project',
     },
     {
         id: 4,
-        todo: 'Go Shopping',
+        todo: 'Add tasks',
     },
     {
         id: 5,
-        todo: 'Finish assignments',
+        todo: 'Finish project',
     },  
     {
         id: 6,
-        todo: 'Drink Water, keep healthy',
+        todo: 'Find a mentor',
     },
 ]

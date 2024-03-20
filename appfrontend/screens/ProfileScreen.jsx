@@ -16,6 +16,7 @@ const ProfileScreen = () => {
   const {name} = useUser();
   const {college} = useUser();
   const {selectedImage, setSelectedImage} = useUser();
+  const {setPassword} = useUser();
 
   const openImagePicker = () => {
     const options = {
@@ -67,7 +68,9 @@ const ProfileScreen = () => {
   }
   const handleLogout = () => {
     // Implement logout functionality here
+    navigation.navigate('Login');
     
+
   };
 
   return (
