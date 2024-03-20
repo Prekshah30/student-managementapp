@@ -46,6 +46,8 @@ const TaskScreen = () => {
     setTaskList(prevTasks => prevTasks.filter(task => task.id !== taskId));
   };
 
+  
+
   const handleSendIconPress = () => {
     if (todo.trim() !== '') {
       const newTask = {
@@ -59,12 +61,12 @@ const TaskScreen = () => {
 
   return (
     <View style={{ flex: 1, backgroundColor: 'white' }}>
-      <View>
+      <View style={{alignItems:'center'}}>
         <Text style={{ marginLeft: 15, marginTop: 20, color: 'black', fontSize: 20 , fontWeight:'bold'}}>
           My Tasks
         </Text>
       </View>
-      <ScrollView style={{  }} horizontal={false}>
+      <ScrollView style={{ marginTop:10 }} horizontal={false}>
         {taskList.map(task => (
           <View key={task.id} style={{ flexDirection: 'row', justifyContent: "space-between", paddingVertical: 10, paddingHorizontal: 20 }}>
             <Text style={{ color: 'black', fontSize: 15 }}>{task.todo}</Text>

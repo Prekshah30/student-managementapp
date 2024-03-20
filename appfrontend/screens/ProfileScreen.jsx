@@ -15,7 +15,6 @@ const ProfileScreen = () => {
 
   const {name} = useUser();
   const {college} = useUser();
-
   const {selectedImage, setSelectedImage} = useUser();
 
   const openImagePicker = () => {

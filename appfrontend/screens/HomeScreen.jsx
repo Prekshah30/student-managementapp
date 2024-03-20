@@ -131,7 +131,7 @@ const HomeScreen = () => {
       <View style={tw``}>
         <View style={tw`mt-4 -ml-12 flex h-12 flex-row  `}>
 
-          <Text style={tw`text-black font-bold ml-18 text-lg`}>
+          <Text style={tw`text-black font-bold ml-18 text-lg font-20`}>
             Feed
           </Text>
         </View>

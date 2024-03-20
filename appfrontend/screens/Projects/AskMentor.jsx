@@ -2,7 +2,8 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, Linking,Pressable } from 'react-native';
 import tw from 'twrnc';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-
+import Feather from 'react-native-vector-icons/Feather';
+import { useNavigation } from '@react-navigation/native';
 const MentorCard = ({ mentor }) => {
   const handleLinkedIn = () => {
     Linking.openURL(mentor.linkedinUrl);
@@ -58,11 +59,24 @@ const AskMentor = () => {
     }
   ];
 
+    const navigation = useNavigation();
+  const handleBack = () => {
+    navigation.navigate('ProjectsList')
+  }
   return (
+    <View style={tw`flex-1 bg-white`}>
+        <View style={tw`flex-row items-center`}>
+        <TouchableOpacity style={{}} onPress={handleBack}>
+        <Feather name="arrow-left" size={24} color="black" style={{ marginLeft: 20, marginTop:18 }} />
+      </TouchableOpacity>
+      <Text style={tw`text-center text-5 font-bold mt-5 text-black ml-25`}>Ask a Mentor</Text>
+        </View>
+    
     <View style={styles.container}>
       {mentors.map((mentor) => (
         <MentorCard key={mentor.id} mentor={mentor} />
       ))}
+    </View>
     </View>
   );
 };
